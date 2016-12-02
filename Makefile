@@ -21,7 +21,7 @@ push:
 	docker push $(NAME):latest
 
 build:
-	docker build -t $(NAME) --build-arg VERSION=$(VERSION) .
+	docker build -t $(NAME) .
 
 download: filebeat-$(VERSION)-x86_64.tar.gz filebeat-$(VERSION)-x86_64
 
