@@ -5,6 +5,7 @@
 
 .PHONY=download
 VERSION=5.0.1
+SHA1=b8139a51834f6c0ff90a7de1159c0b2162b86e7e
 NAME=mhristof/filebeat
 
 default: build
@@ -20,7 +21,7 @@ push:
 	docker push $(NAME):latest
 
 build:
-	docker build -t $(NAME) .
+	docker build -t $(NAME) --build-arg VERSION=$(VERSION) .
 
 download: filebeat-$(VERSION)-x86_64.tar.gz filebeat-$(VERSION)-x86_64
 
@@ -30,7 +31,7 @@ filebeat-$(VERSION)-x86_64:
 
 filebeat-$(VERSION)-x86_64.tar.gz:
 	wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-$(VERSION)-linux-x86_64.tar.gz -O filebeat-$(VERSION)-x86_64.tar.gz
-	openssl sha1 filebeat-$(VERSION)-x86_64.tar.gz | grep b8139a51834f6c0ff90a7de1159c0b2162b86e7e
+	openssl sha1 filebeat-$(VERSION)-x86_64.tar.gz | grep $(SHA1)
 
 clean:
 	rm -rf filebeat-$(VERSION)-x86_64*
