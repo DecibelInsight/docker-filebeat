@@ -6,7 +6,7 @@
 .PHONY=download
 VERSION=5.0.1
 SHA1=b8139a51834f6c0ff90a7de1159c0b2162b86e7e
-NAME=mhristof/filebeat
+NAME=mspanakis/filebeat
 
 default: build
 
