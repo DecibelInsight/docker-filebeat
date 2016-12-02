@@ -4,7 +4,7 @@
 #
 
 .PHONY=download
-VERSION=1.3.1.1
+VERSION=5.0.1
 NAME=mhristof/filebeat
 
 default: build
@@ -22,17 +22,18 @@ push:
 build:
 	docker build -t $(NAME) .
 
-download: filebeat-1.3.1-x86_64.tar.gz filebeat-1.3.1-x86_64
+download: filebeat-$(VERSION)-x86_64.tar.gz filebeat-$(VERSION)-x86_64
 
-filebeat-1.3.1-x86_64:
-	tar xvf filebeat-1.3.1-x86_64.tar.gz
+filebeat-$(VERSION)-x86_64:
+	mkdir filebeat-$(VERSION)-x86_64
+	tar xvf filebeat-$(VERSION)-x86_64.tar.gz -C filebeat-$(VERSION)-x86_64/ --strip-components=1
 
-filebeat-1.3.1-x86_64.tar.gz:
-	wget https://download.elastic.co/beats/filebeat/filebeat-1.3.1-x86_64.tar.gz -O filebeat-1.3.1-x86_64.tar.gz
-	openssl sha1 filebeat-1.3.1-x86_64.tar.gz | grep 693c04e2251498e73436cfc2b36a3a0aec920a2d
+filebeat-$(VERSION)-x86_64.tar.gz:
+	wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-$(VERSION)-linux-x86_64.tar.gz -O filebeat-$(VERSION)-x86_64.tar.gz
+	openssl sha1 filebeat-$(VERSION)-x86_64.tar.gz | grep b8139a51834f6c0ff90a7de1159c0b2162b86e7e
 
 clean:
-	rm -rf filebeat-1.3.1-x86_64*
+	rm -rf filebeat-$(VERSION)-x86_64*
 
 all:
 	@echo "Makefile needs your attention"
